@@ -1,0 +1,42 @@
+<div id="rida">
+
+	<div id="rida-nav">
+		{{ get_nav($navigation) }}
+
+		<div class="social-area">
+
+			{{ if ($github !== '') }}
+			<div class="arrow_box_right">
+			<a href="http://github.com/{{ $github }}" title="View on Github">
+				View on Github
+			</a>
+			</div>
+			{{ endif }}
+			{{ if ($twitter !== '') }}
+			<div class="arrow_box_right">
+			<a href="http://twitter.com/{{ $twitter }}" title="Follow on Twitter">
+				Follow on Twitter
+			</a>
+			</div>
+			{{ endif }}
+		</div>
+	</div>
+
+	<div id="rida-content">
+		<div id="rida-content-info">
+			<div class="arrow_box">
+				This file is modefied at {{ date('d-M-Y H:i A', $page['last_modefied']) }}
+			</div>
+		</div>
+		<div id="rida-content-body">
+			{{ $page['content'] }}
+		</div>
+	</div>
+
+</div>
+
+<script type="text/javascript">
+	// Prettify PlugIn
+	$('pre, table code').addClass('prettyprint');
+	prettyPrint();
+</script>
