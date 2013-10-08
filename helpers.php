@@ -38,15 +38,17 @@ function change_url($filename) {
  */
 function get_tree($path = null)
 {
-	$path = is_null($path) ? __DIR__ : $path;
+	$path = is_null($path) ? __DIR__ : rtrim($path, DS).DS;
 
 	$paths = new \DirectoryIterator($path);
 
 	$tree = array();
 
+	$skips = array('.gitignore', '.git', '.gitkeep', '.DS_Store', '__MACOSX');
+
 	foreach($paths as $file) {
 
-        if(! $file->isDot() ) {
+        if(! $file->isDot() and !in_array($file->getFilename(), $skips) ) {
 
         	$name = change_title($file->getFilename());
 
@@ -131,12 +133,17 @@ function get_page($tree, $current, $child_loop = false) {
 	}
 
 	if ($current == '' and $child_loop !== true) {
-		$path = DOCS_PATH.'index.md';
+		$path = DOCS_PATH.\Config::get('rida::rida.index_page', 'index.md');
+
+		if (!is_file($path)) {
+			return array();
+		}
+
 		$page = array(
 			'name' => 'index',
 			'path' => $path,
 			'last_modefied' => filemtime($path),
-			'content' => markdown_extra(file_get_contents(DOCS_PATH.'index.md'))
+			'content' => markdown_extra(file_get_contents($path))
 		);
 	}
 

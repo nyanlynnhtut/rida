@@ -14,7 +14,7 @@ class Bootstrap extends \Reborn\Module\AbstractBootstrap
 	{
 		$path = \Config::get('rida::rida.docs_path');
 
-		$path = is_null($path) ? __DIR__.DS.'docs'.DS : $path;
+		$path = is_null($path) ? __DIR__.DS.'docs'.DS : rtrim($path, DS).DS;
 
 		define('DOCS_PATH', $path);
 
