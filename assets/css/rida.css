@@ -21,6 +21,14 @@
   color: #667A88;
 }
 
+#rida-nav li.file {
+  list-style-type: circle;
+}
+
+#rida-nav li.current {
+  list-style-type: disc;
+}
+
 #rida-nav li a {
 	color: #3F8EC5;
 }
@@ -31,6 +39,11 @@
 
 #rida-nav li a:hover {
 	color: #0061A6;
+}
+
+#rida-nav span {
+  font-weight: bold;
+  font-size: 16px;
 }
 
 #rida-content {

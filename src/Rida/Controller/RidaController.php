@@ -18,7 +18,7 @@ class RidaController extends \PublicController
 
 		$current = ltrim(str_replace(rtrim(rbUrl('docs'), '/'), '', \Uri::current()), '/');
 
-		$page = get_page($navigation, $current, \Module::getData('Rida', 'uri'));
+		$page = get_page($navigation, $current, \Module::get('Rida', 'uri'));
 
 		$not_found = false;
 

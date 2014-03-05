@@ -44,7 +44,7 @@ function get_tree($path = null)
 
 	$tree = array();
 
-	$skips = array('.gitignore', '.git', '.gitkeep', '.DS_Store', '__MACOSX');
+	$skips = array('.gitignore', '.git', '.gitkeep', '.DS_Store', '__MACOSX', 'README.md', 'README');
 
 	foreach($paths as $file) {
 
@@ -87,18 +87,23 @@ function get_nav($tree, $tag = 'ul', $url_prefix = 'docs')
 {
 	$o = '<'.$tag.'>';
 
-	$url = rbUrl($url_prefix);
+	$url = url($url_prefix).'/';
 
 	foreach ($tree as $c) {
 
 		if (\Uri::current() == $url.$c['url']) {
 			$o .='<li class="active current">';
 		} else {
-			$o .='<li>';
+			$o .='<li class="'.$c['type'].'">';
 		}
-		$href = ($c['type'] == 'folder') ? '#' : $url . $c['url'];
-		$o .= '<a href="'. $href .'" >';
-		$o .= $c['name'].'</a>';
+
+		$href = ($c['type'] == 'folder') ? '' : $url . $c['url'];
+
+		if ($href) {
+			$o .= '<a href="'. $href .'" >'.$c['name'].'</a>';
+		} else {
+			$o .= '<span>'.$c['name'].'</span>';
+		}
 
 		if (isset($c['tree'])) {
 			$o .= get_nav($c['tree'], $tag);
@@ -123,6 +128,8 @@ function get_page($tree, $current, $child_loop = false) {
 	$page = array();
 
 	$cache_name = ($current == '') ? 'index' : str_replace('/', '_', $current);
+
+	$cache_name = 'Rida::'.$cache_name;
 
 	if (\Cache::has($cache_name)) {
 		$data = \Cache::get($cache_name);
