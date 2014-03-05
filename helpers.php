@@ -40,6 +40,10 @@ function get_tree($path = null)
 {
 	$path = is_null($path) ? __DIR__ : rtrim($path, DS).DS;
 
+    if (! is_dir($path) ) {
+        throw new \Reborn\Exception\DirectoryNotFoundException($path);
+    }
+
 	$paths = new \DirectoryIterator($path);
 
 	$tree = array();

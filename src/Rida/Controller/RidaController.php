@@ -14,9 +14,19 @@ class RidaController extends \PublicController
 	{
 		$file = $this->param('file');
 
-		$navigation = get_tree(DOCS_PATH);
+		$title = \Config::get('rida::rida.title');
 
-		$current = ltrim(str_replace(rtrim(rbUrl('docs'), '/'), '', \Uri::current()), '/');
+		try {
+			$navigation = get_tree(DOCS_PATH);
+		} catch (\Reborn\Exception\DirectoryNotFoundException $e) {
+			$message = \Config::get('rida::rida.message');
+			$this->template->message = str_replace('{{title}}', $title, $message);
+			$this->template->setPartial('comingsoon');
+
+			return $this->template->render();
+		}
+
+		$current = ltrim(str_replace(rtrim(url('docs'), '/'), '', \Uri::current()), '/');
 
 		$page = get_page($navigation, $current, \Module::get('Rida', 'uri'));
 
@@ -38,12 +48,12 @@ class RidaController extends \PublicController
 
 		if ($not_found) return $this->notFound();
 
-		$this->template->doc_title = \Config::get('rida::rida.title');
+		$this->template->doc_title = $title;
 
 		$this->template->github = \Config::get('rida::rida.github');
 		$this->template->twitter = \Config::get('rida::rida.twitter');
 
-		$this->template->title('Doc Viewer')
+		$this->template->title($title)
 						->style('rida.css', 'Rida')
 						->script('prettify.js', 'Rida')
 						->setPartial('index', compact('page', 'navigation'));

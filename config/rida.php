@@ -16,5 +16,9 @@ return array(
 		'github' => '',
 
 		// Twitter Account [eg: nyanlynnhtut]
-		'twitter' => ''
+		'twitter' => '',
+
+		// Coming Soon Page Message
+		// {{title}} will be replace with Documentation Title
+		'message' => '{{title}} is Coming Soon!',
 	);

@@ -69,7 +69,7 @@ class RidaInfo extends \Reborn\Module\AbstractInfo
 	 *
 	 * @var boolean
 	 **/
-	protected $backendSupport = true;
+	protected $backendSupport = false;
 
 	/**
 	 * Module can be use Default Module for Frontend variable
