@@ -6,15 +6,17 @@
 		<div class="social-area">
 
 			{{ if ($github !== '') }}
-			<div class="arrow_box_right">
+			<div class="arrow_box_right" id="github-url">
 			<a href="http://github.com/{{ $github }}" title="View on Github">
+				<i class="github"></i>
 				View on Github
 			</a>
 			</div>
 			{{ endif }}
 			{{ if ($twitter !== '') }}
-			<div class="arrow_box_right">
+			<div class="arrow_box_right" id="twitter-url">
 			<a href="http://twitter.com/{{ $twitter }}" title="Follow on Twitter">
+				<i class="twitter"></i>
 				Follow on Twitter
 			</a>
 			</div>

@@ -9,6 +9,9 @@ return array(
 		// Default is index.md
 		'index_page' => 'index.md',
 
+		// Skip file lists for documentatiion
+		'skips' => array(),
+
 		// Documentation Title
 		'title' => 'Documentation',
 

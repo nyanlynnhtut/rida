@@ -50,6 +50,8 @@ function get_tree($path = null)
 
 	$skips = array('.gitignore', '.git', '.gitkeep', '.DS_Store', '__MACOSX', 'README.md', 'README');
 
+    $skips = array_merge(Config::get('rida::rida.skips'), $skips);
+
 	foreach($paths as $file) {
 
         if(! $file->isDot() and !in_array($file->getFilename(), $skips) ) {
@@ -74,9 +76,44 @@ function get_tree($path = null)
         }
     }
 
-    sort($tree);
+    //sort($tree);
 
 	return $tree;
+}
+
+/**
+ * Sorting for Tree data.
+ *
+ * @param array $tree
+ * @param boolean $child_loop
+ * @return array
+ **/
+function tree_sorting($tree, $child_loop = false)
+{
+    $index_data = null;
+    $index = Config::get('rida::rida.index_page', 'index.md');
+
+    if ( !$child_loop && isset($tree[$index]) ) {
+        $index_data = $tree[$index];
+        unset($tree[$index]);
+    }
+
+    foreach ($tree as &$t) {
+
+        if ($t['type'] == 'folder' and !empty($t['tree'])) {
+            $t['tree'] = tree_sorting($t['tree'], true);
+        } else {
+            $t = $t;
+        }
+    }
+
+    ksort($tree);
+
+    if ( !$child_loop ) {
+        $tree = array_merge(array($index_data), $tree);
+    }
+
+    return $tree;
 }
 
 /**

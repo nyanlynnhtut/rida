@@ -28,6 +28,8 @@ class RidaController extends \PublicController
 
 		$current = ltrim(str_replace(rtrim(url('docs'), '/'), '', \Uri::current()), '/');
 
+		$navigation = tree_sorting($navigation);
+
 		$page = get_page($navigation, $current, \Module::get('Rida', 'uri'));
 
 		$not_found = false;

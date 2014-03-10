@@ -52,15 +52,19 @@
 }
 
 #rida-content-info {
-  text-align: center;
+  text-align: right;
   margin-bottom: 10px;
+  padding: 10px;
+  color: #968164;
+  border-bottom: 1px solid #C5D5DD;
+  background: #E6F1F6;
 }
 .clear {
   clear: both;
 }
 
 /* Arrow box code generate by http://cssarrowplease.com/ */
-.arrow_box, .arrow_box_right {
+/*.arrow_box, .arrow_box_right {
   position: relative;
   background: #6294a3;
   border: 1px solid #4f6180;
@@ -120,10 +124,10 @@
   border-width: 11px;
   top: 50%;
   margin-top: -12px;
-}
+}*/
 
 #rida-content-body {
-  padding-top: 40px;
+  padding-top: 10px;
 }
 
 #rida-content-body h1,
@@ -148,13 +152,15 @@
 }
 #rida-content-body h2:before {
   content: '#';
+  margin-right: 8px;
 }
 
 #rida-content-body h3 {
   font-size: 16px;
 }
 #rida-content-body h3:before {
-  content: '- ';
+  content: '-';
+  margin-right: 8px;
 }
 
 #rida-content-body h4 {
@@ -262,13 +268,15 @@
 
 /* Github, Twitter, Social Area ------------ */
 .social-area {
-  margin: 30px;
+  margin: 30px 0;
+  padding: 10px;
+  background: #fff;
+  border-top: 1px solid #dfdfdf;
 }
 
 .social-area a {
   display: inline-block;
   padding: 6px;
-  color: #fff;
 }
 
 .github {
